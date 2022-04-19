@@ -33,7 +33,15 @@ JonasPammer.github.io/ansible-role-pip].__
 endif::[]
 
 
-An Ansible role for installing the python package installer to the system.
+An Ansible role for installing pip (the python package installer) to the system.
+
+This role also ensures pip has the defined version by upgrading pip using pip.
+
+__See https://pypi.org/project/pip/#history[pip's pypi release history] for available `pip`-versions.__
+
+_See https://pip.pypa.io/en/stable/news/[pip's documentation] for a__
+_human-made changelog of the `pip`-project which contains information useful to end users_
+_(As described in their https://pip.pypa.io/en/latest/development/contributing/#news-entries[Contribution Guidelines])._
 
 
 toc::[]
@@ -70,26 +78,28 @@ must be installed on the Ansible controller.
 // Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.)
 // should be mentioned here as well.
 
-[source,yaml]
-----
-variable: default value
-----
-Description
-
 
 [source,yaml]
 ----
-variable: [OS-specific by default, see /vars directory]
+pip_version: ">=20"
 ----
-Description
-
+The version of pip to install using pip after pip was installed 
+in form of a https://pip.pypa.io/en/stable/cli/pip_install/#requirement-specifiers[pip requirement specifier].
 
 [source,yaml]
 ----
-variable: [OS-specific by default, see /vars directory]
+pip_package: "python3-pip"
 ----
-(Debian/Ubuntu only)
-Description
+The name of the package(s) to install to get `pip` on the system. 
+For older systems that don't have Python 3 available, you can set this to `python-pip`.
+
+[source,yaml]
+----
+pip_executable: "{{ 'pip3' if pip_package.startswith('python3') else 'pip' }}"
+----
+The role will try to autodetect the pip executable based on the `pip_package` 
+(e.g. `pip` for Python 2 and `pip3` for Python 3). You can also override this explicitly, e.g. `pip_executable: pip3.6`.
+
 
 
 [[dependencies]]
@@ -121,9 +131,18 @@ include::molecule/default/prepare.yml[]
 ----
 roles:
     - "jonaspammer.pip"
+----
+====
+
+.Installing pip for Python 2
+====
+[source,yaml]
+----
+roles:
+  - "jonaspammer.pip"
 
 vars:
-    some_var: "some_value"
+  - pip_package: "python-pip"
 ----
 ====
 

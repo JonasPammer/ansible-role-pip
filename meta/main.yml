@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   role_name: "pip"
-  description: "An ansible role for installing the python package installer to the system."
+  description: "An ansible role for installing pip (python package installer) to the system."
 
   author: "jonaspammer"
   license: MIT
