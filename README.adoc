@@ -35,6 +35,9 @@ endif::[]
 
 An Ansible role for installing pip (the python package installer) to the system.
 
+This role can also be used to install a defined set of pip packages
+either to the system or a virtualenv.
+
 This role also ensures pip has the defined version by upgrading pip using pip.
 
 __See https://pypi.org/project/pip/#history[pip's pypi release history] for available `pip`-versions.__
@@ -100,6 +103,22 @@ pip_executable: "{{ 'pip3' if pip_package.startswith('python3') else 'pip' }}"
 The role will try to autodetect the pip executable based on the `pip_package`
 (e.g. `pip` for Python 2 and `pip3` for Python 3). You can also override this explicitly, e.g. `pip_executable: pip3.6`.
 
+[source,yaml]
+----
+pip_install_packages: []
+----
+A list of packages to install with
+https://docs.ansible.com/ansible/2.9/modules/pip_module.html[pip].
+
+Each entry may either be a simple string (shorthand for `- name: …`)
+or an own object with below properties:
+
+name (required)::
+The name of a Python library to install or the url(bzr+,hg+,git+,svn+) of the remote package.
+version::
+The version number to install of the Python library specified in the name parameter.
+state::
+The state of the pip module (i.e. absent / forcereinstall / latest / *present*)
 
 
 [[dependencies]]
@@ -145,6 +164,40 @@ vars:
   - pip_package: "python-pip"
 ----
 ====
+
+.Installing pip packages
+====
+[source,yaml]
+----
+roles:
+  - "jonaspammer.pip"
+
+vars:
+  pip_install_packages:
+  # Specify names and versions.
+  - name: docker
+    version: "1.2.3"
+  - name: awscli
+    version: "1.11.91"
+
+  # Or specify bare packages to get the latest release.
+  - docker
+  - awscli
+
+  # Or uninstall a package.
+  - name: docker
+    state: absent
+
+  # Or update a package to the latest version.
+  - name: docker
+    state: latest
+
+  # Or force a reinstall.
+  - name: docker
+    state: forcereinstall
+----
+====
+
 
 
 [[development]]

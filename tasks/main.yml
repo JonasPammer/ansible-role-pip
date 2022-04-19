@@ -10,3 +10,11 @@
   ansible.builtin.pip:
     name: "pip{{ pip_version }}"
     executable: "{{ pip_executable }}"
+
+- name: Install defined pip packages.
+  pip:
+    name: "{{ item.name | default(item) }}"
+    version: "{{ item.version | default(omit) }}"
+    state: "{{ item.state | default(omit) }}"
+    executable: "{{ pip_executable }}"
+  loop: "{{ pip_install_packages }}"

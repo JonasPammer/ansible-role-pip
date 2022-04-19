@@ -11,3 +11,9 @@
 
   roles:
     - role: "ansible-role-pip"
+
+  vars:
+    pip_install_packages:
+      - name: awscli
+        version: "1.22.97"
+      - awscli
