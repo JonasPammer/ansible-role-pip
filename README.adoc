@@ -81,7 +81,6 @@ must be installed on the Ansible controller.
 // Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.)
 // should be mentioned here as well.
 
-
 [source,yaml]
 ----
 pip_version: ">=20"
@@ -95,6 +94,12 @@ pip_package: "python3-pip"
 ----
 The name of the package(s) to install to get `pip` on the system.
 For older systems that don't have Python 3 available, you can set this to `python-pip`.
+
+[source,yaml]
+----
+pip_virtualenv_packages: "virtualenv"
+----
+The name of the package(s) to install to get `virtualenv` on the system.
 
 [source,yaml]
 ----
@@ -115,10 +120,49 @@ or an own object with below properties:
 
 name (required)::
 The name of a Python library to install or the url(bzr+,hg+,git+,svn+) of the remote package.
+
 version::
 The version number to install of the Python library specified in the name parameter.
+
 state::
 The state of the pip module (i.e. absent / forcereinstall / latest / *present*)
+
+umask::
+_Defaults to `pip_install_packages_umask` if exists._
++
+The system umask to apply before installing the pip package.
+This is useful, for example, when installing on systems that have a very restrictive umask by default
+(e.g., "0077") and you want to pip install packages which are to be used by all users.
+Note that this requires you to specify desired umask mode as an octal string, (e.g., "0022").
+
+virtualenv::
+_Defaults to `pip_install_packages_virtualenv` if exists._
++
+Path to a virtualenv directory to install into.
+If the virtualenv does not exist, it will be created before installing packages.
+The optional `virtualenv_command`, and `virtualenv_python` options affect the creation of the virtualenv.
+
+virtualenv_command::
+_Defaults to `pip_install_packages_virtualenv_command` if exists._
++
+The command or a pathname to the command to create the virtual environment with.
+For example `pyvenv`, *`virtualenv`*, `virtualenv2`, `~/bin/virtualenv`, `/usr/local/bin/virtualenv`.
+
+virtualenv_python::
+_Defaults to `pip_install_packages_virtualenv_python` if exists._
++
+The Python executable used for creating the virtual environment.
+For example python3.5, python2.7.
+When not specified, the Python version used to run the ansible module is used.
+This parameter should not be used when `virtualenv_command` is using `pyvenv` or the `-m venv` module.
+
+virtualenv_site_packages::
+_Defaults to `pip_install_packages_virtualenv_python` if exists._
++
+Whether the virtual environment will inherit packages from the global site-packages directory.
+Note that if this setting is changed on an already existing virtual environment
+it will not have any effect - the environment must be deleted and newly created.
+
 
 
 [[dependencies]]

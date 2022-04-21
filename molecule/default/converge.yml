@@ -10,3 +10,5 @@
       - name: awscli
         version: "1.22.97"
       - awscli
+      - name: ipaddress
+        virtualenv: /virtualenv
