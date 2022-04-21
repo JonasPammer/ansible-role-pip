@@ -17,7 +17,7 @@
     name: "{{ pip_virtualenv_packages }}"
     state: present
   when: (pip_install_packages_virtualenv is defined
-    or pip_install_packages | map(attribute='virtualenv') | select('defined') | length > 0)
+    or pip_install_packages | map(attribute='virtualenv') | select('defined') | list | length > 0)
 
 - name: Install defined pip packages.
   pip:
