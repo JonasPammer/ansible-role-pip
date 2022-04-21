@@ -30,4 +30,6 @@
     virtualenv_command: "{{ item.virtualenv_command | default(pip_install_packages_virtualenv_command | default(omit)) }}"
     virtualenv_python: "{{ item.virtualenv_python | default(pip_install_packages_virtualenv_python | default(omit)) }}"
     virtualenv_site_packages: "{{ item.virtualenv_site_packages | default(pip_install_packages_virtualenv_site_packages | default(omit)) }}"
+    extra_args: "{{ item.extra_args | default(pip_install_packages_extra_args | default(omit)) }}"
+  environment: "{{ item.environment | default(pip_install_packages_environment | default(omit)) }}"
   loop: "{{ pip_install_packages }}"
