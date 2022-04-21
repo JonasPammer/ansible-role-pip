@@ -4,8 +4,16 @@
 pip_version: ">=20"
 
 pip_package: python3-pip
-pip_virtualenv_packages:
-  - virtualenv
+_pip_virtualenv_packages:
+  default: [virtualenv]
+  CentOS_7: [python-virtualenv]
 
 pip_executable: "{{ 'pip3' if pip_package.startswith('python3') else 'pip' }}"
 pip_install_packages: []
+
+pip_virtualenv_packages: "{{
+  _pip_virtualenv_packages[ansible_distribution ~ '_' ~ ansible_distribution_major_version]|default(
+  _pip_virtualenv_packages[ansible_os_family ~ '_' ~ ansible_distribution_major_version])|default(
+  _pip_virtualenv_packages[ansible_distribution])|default(
+  _pip_virtualenv_packages[ansible_os_family])|default(
+  _pip_virtualenv_packages['default']) }}"
