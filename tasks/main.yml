@@ -8,7 +8,8 @@
 
 - name: Install pip using pip to ensure desired version.
   ansible.builtin.pip:
-    name: "pip{{ pip_version }}"
+    name: "pip"
+    version: "{{ pip_version }}"
     executable: "{{ pip_executable }}"
 
 - name: Install defined pip packages.
