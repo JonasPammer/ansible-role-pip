@@ -21,6 +21,7 @@
 
 - name: Install defined pip packages.
   pip:
+    requirements: "{{ item.requirements | default(omit) }}"
     name: "{{ item.name | default(item) }}"
     version: "{{ item.version | default(omit) }}"
     state: "{{ item.state | default(omit) }}"

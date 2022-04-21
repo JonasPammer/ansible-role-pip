@@ -118,11 +118,20 @@ https://docs.ansible.com/ansible/2.9/modules/pip_module.html[pip].
 Each entry may either be a simple string (shorthand for `- name: …`)
 or an own object with below properties:
 
-name (required)::
+_chdir_::
+`cd` into this directory before running the command.
+
+name::
 The name of a Python library to install or the url(bzr+,hg+,git+,svn+) of the remote package.
 
 version::
 The version number to install of the Python library specified in the name parameter.
+
+requirements::
+Instead of using `name` and `version` to define a single package inline
+you may also use this option to reference to a path of a pip requirements file,
+which should be local to the _remote_ system.
+File can be specified as a relative path if using the `chdir` option.
 
 state::
 The state of the pip module (i.e. absent / forcereinstall / latest / *present*)
