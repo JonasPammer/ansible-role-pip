@@ -163,6 +163,15 @@ Whether the virtual environment will inherit packages from the global site-packa
 Note that if this setting is changed on an already existing virtual environment
 it will not have any effect - the environment must be deleted and newly created.
 
+extra_args::
+_Defaults to `pip_install_packages_extra_args` if exists._
++
+Extra arguments passed to pip.
+
+environment::
+_Defaults to `pip_install_packages_environment` if exists._
++
+Environment Variables passed to the pip module.
 
 
 [[dependencies]]
