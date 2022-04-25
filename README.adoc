@@ -194,14 +194,14 @@ Environment Variables passed to the pip module.
 
 
 .Overview of related roles
-====
+****
 Most roles have a “soft dependency” described in their `requirements.yml` file.
 The following diagram is a compilation of the soft dependencies of this role
 as well as the recursive soft dependencies of their `requirements.yml`.
 
 image:https://raw.githubusercontent.com/JonasPammer/ansible-roles/master/graphs/dependencies_pip.svg[
 requirements.yml dependency graph of jonaspammer.pip]
-====
+****
 
 
 [[example_playbooks]]
