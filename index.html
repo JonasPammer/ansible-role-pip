@@ -964,7 +964,19 @@ it will not have any effect - the environment must be deleted and newly created.
 <div class="sect1">
 <h2 id="dependencies">👫 Dependencies</h2>
 <div class="sectionbody">
-
+<div class="exampleblock">
+<div class="title">Example 1. Overview of related roles</div>
+<div class="content">
+<div class="paragraph">
+<p>Most roles have a “soft dependency” described in their <code>requirements.yml</code> file.
+The following diagram is a compilation of the soft dependencies of this role
+as well as the recursive soft dependencies of their <code>requirements.yml</code>.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="https://raw.githubusercontent.com/JonasPammer/ansible-roles/master/graphs/dependencies_pip.svg" alt="requirements.yml dependency graph of jonaspammer.pip"></span></p>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -978,7 +990,8 @@ it will not have any effect - the environment must be deleted and newly created.
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The machine needs to be prepared. In CI, this is done using <code>molecule/default/prepare.yml</code>:</p>
+<p>The machine needs to be prepared.
+In CI, this is done using <code>molecule/default/prepare.yml</code>:</p>
 </div>
 <div class="listingblock">
 <div class="title"><a href="molecule/default/prepare.yml" class="bare">molecule/default/prepare.yml</a></div>
@@ -999,7 +1012,7 @@ it will not have any effect - the environment must be deleted and newly created.
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 1. Minimum Viable Play</div>
+<div class="title">Example 2. Minimum Viable Play</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -1010,7 +1023,7 @@ it will not have any effect - the environment must be deleted and newly created.
 </div>
 </div>
 <div class="exampleblock">
-<div class="title">Example 2. Installing pip for Python 2</div>
+<div class="title">Example 3. Installing pip for Python 2</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -1024,7 +1037,7 @@ it will not have any effect - the environment must be deleted and newly created.
 </div>
 </div>
 <div class="exampleblock">
-<div class="title">Example 3. Installing pip packages</div>
+<div class="title">Example 4. Installing pip packages</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -1414,7 +1427,7 @@ SOFTWARE.</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-04-22 07:32:21 UTC
+Last updated 2022-04-25 07:04:05 UTC
 </div>
 </div>
 </body>
