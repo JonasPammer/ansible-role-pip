@@ -83,7 +83,7 @@ in form of a https://pip.pypa.io/en/stable/cli/pip_install/#requirement-specifie
 
 [TIP]
 ====
-Checkout https://pypi.org/project/pip/#history[pip's pypi release history] 
+Checkout https://pypi.org/project/pip/#history[pip's pypi release history]
 for available `pip`-versions.
 
 Also, if interested, checkout https://pip.pypa.io/en/stable/news/[the pip documentation]
