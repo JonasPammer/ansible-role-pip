@@ -39,15 +39,6 @@ to either the system or in a virtualenv.
 
 This role also ensures pip has the defined version by upgrading pip using pip.
 
-[TIP]
-See https://pypi.org/project/pip/#history[pip's pypi release history] for available `pip`-versions.
-
-[TIP]
-See https://pip.pypa.io/en/stable/news/[the pip documentation]
-for a human-generated change log of the `pip` project
-that contains useful information for end users
-(Maintained as described in their https://pip.pypa.io/en/latest/development/contributing/#news-entries[Contribution Guidelines]).
-
 
 toc::[]
 
@@ -89,6 +80,16 @@ pip_version: ">=20"
 ----
 The version of pip to install using pip after pip was installed
 in form of a https://pip.pypa.io/en/stable/cli/pip_install/#requirement-specifiers[pip requirement specifier].
+
+[TIP]
+====
+Checkout https://pypi.org/project/pip/#history[pip's pypi release history] 
+for available `pip`-versions.
+
+Also, if interested, checkout https://pip.pypa.io/en/stable/news/[the pip documentation]
+for a human-generated change log of the changes to the `pip` project
+__(Maintained as described in their https://pip.pypa.io/en/latest/development/contributing/#news-entries[Contribution Guidelines])__.
+====
 
 [source,yaml]
 ----
