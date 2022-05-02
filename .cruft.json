@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/JonasPammer/cookiecutter-ansible-role.git",
-  "commit": "e0730fba39e6a1af6e67fc3bdc9243569eccbcbc",
+  "commit": "b5c93c9d90b5f00daa5c8afdc8b682c47f84a291",
   "checkout": null,
   "context": {
     "cookiecutter": {
@@ -13,6 +13,7 @@
       "allow_duplicates": "no",
       "ansible_user_needs_to_become": "True",
       "role_name": "pip",
+      "project_slug": "ansible-role-pip",
       "project_short_purpose": "installing the python package installer to the system",
       "_template": "https://github.com/JonasPammer/cookiecutter-ansible-role.git"
     }
