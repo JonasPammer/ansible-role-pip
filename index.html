@@ -802,13 +802,51 @@ must be installed on the Ansible controller.</p>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="yaml"><span class="na">pip_version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">&gt;=20"</span></code></pre>
+<pre class="rouge highlight"><code data-lang="yaml"><span class="na">pip_version</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">latest possible version which supports the python version of behind `pip_python_executable`</span><span class="pi">]</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>The version of pip to install using pip after pip was installed
 in form of a <a href="https://pip.pypa.io/en/stable/cli/pip_install/#requirement-specifiers">pip requirement specifier</a>.</p>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Version behind <code>pip_python_executable</code></th>
+<th class="tableblock halign-left valign-top">Default <code>pip_version</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no match</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&gt;=22</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3.6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;22</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3.5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;21</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2 (.7 assumed)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;21</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3.4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;19.2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3.3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;18.0</p></td>
+</tr>
+</tbody>
+</table>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -852,8 +890,12 @@ For older systems that don&#8217;t have Python 3 available, you can set this to 
 </div>
 </div>
 <div class="paragraph">
-<p>The role will try to autodetect the pip executable based on the <code>pip_package</code>
-(e.g. <code>pip</code> for Python 2 and <code>pip3</code> for Python 3). You can also override this explicitly, e.g. <code>pip_executable: pip3.6</code>.</p>
+<p>The <code>pip_executable</code> passed to the <code>ansible.builtin.pip</code> modules issued by this role.</p>
+</div>
+<div class="paragraph">
+<p>The role will try to autodetect the pip executable based on the <code>pip_package</code>.
+You may also override this explicitly, e.g. <code>pip_executable: pip3.6</code>,
+in case .</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -954,6 +996,17 @@ it will not have any effect - the environment must be deleted and newly created.
 </div>
 </dd>
 </dl>
+</div>
+<div id="pip_python_executable" class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="yaml"><span class="na">pip_python_executable</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">'python3'</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">pip_package.startswith('python3')</span><span class="nv"> </span><span class="s">else</span><span class="nv"> </span><span class="s">'python'</span><span class="nv"> </span><span class="s">}}"</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This variable is being used to determine the default value of <code>pip_version</code>.</p>
+</div>
+<div class="paragraph">
+<p>The role will try to autodetect the python executable based on the <code>pip_package</code>.</p>
 </div>
 </div>
 </div>
@@ -1547,7 +1600,7 @@ SOFTWARE.</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-05-03 06:59:55 UTC
+Last updated 2022-05-03 10:03:11 UTC
 </div>
 </div>
 </body>
