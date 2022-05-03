@@ -1,10 +1,13 @@
 ---
 # tasks file of ansible-role jonaspammer.pip
 
-- name: Install pip from system packages.
+- name: Install pip system packages.
   ansible.builtin.package:
-    name: "{{ [pip_package] }}"
+    name: "{{ pip_package }}"
     state: present
+
+- name: import tasks to determine default pip version
+  ansible.builtin.import_tasks: determine-default-pip-version.yml
 
 - name: Install pip using pip to ensure desired version.
   ansible.builtin.pip:
@@ -12,7 +15,7 @@
     version: "{{ pip_version }}"
     executable: "{{ pip_executable }}"
 
-- name: Install virtualenv package.
+- name: Install virtualenv system packages.
   package:
     name: "{{ pip_virtualenv_packages }}"
     state: present

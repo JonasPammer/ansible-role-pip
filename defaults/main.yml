@@ -1,9 +1,12 @@
 ---
 # defaults file of ansible-role jonaspammer.pip
 # See README.adoc for documentation. If you change a default here, also update it in the README.
-pip_version: ">=20"
 
 pip_package: python3-pip
+
+pip_python_executable: "{{ 'python3' if pip_package.startswith('python3') else 'python' }}"
+pip_version: "{{ pip__default_pip_version }}"
+
 _pip_virtualenv_packages:
   default: [virtualenv]
   CentOS_7: [python-virtualenv]

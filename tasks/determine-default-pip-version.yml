@@ -1,0 +1,56 @@
+---
+- name: execute command to get python version
+  ansible.builtin.shell: "{{ pip_python_executable }} --version"
+  register: pip__register_shell_pip_python_version
+  changed_when: false
+
+- name: analyze if python version is python 2
+  ansible.builtin.set_fact:
+    pip__python_executable_is_python2: "{{ pip__register_shell_pip_python_version.stderr is search('Python 2') }}"
+
+- name: create intermediate variable to accommodate python2 version output bug
+  ansible.builtin.set_fact:
+    # Python2 output version info to stderr [https://bugs.python.org/issue18338]
+    pip__shell_pip_python_version_combined_stdout: "{{
+      pip__python_executable_is_python2 | ternary(pip__register_shell_pip_python_version.stderr,
+      pip__register_shell_pip_python_version.stdout) }}"
+
+- name: analyze python version parts
+  ansible.builtin.set_fact:
+    pip__python_executable_version_raw: "{{ pip__shell_pip_python_version_combined_stdout.split(' ')[1] }}"
+
+- name: analyze python version parts
+  ansible.builtin.set_fact:
+    # note: these are not integers but AnsibleUnsafeTexts!
+    pip__python_executable_version_major: "{{ pip__python_executable_version_raw.split('.')[0] | int }}"
+    pip__python_executable_version_minor: "{{ pip__python_executable_version_raw.split('.')[1] | int }}"
+
+# https://pip.pypa.io/en/stable/news/#v22-0 (2022-01-29)
+- name: determine default pip version (<22)
+  ansible.builtin.set_fact:
+    pip__default_pip_version: "<22"
+  when: (pip__python_executable_version_major|int == 3 and pip__python_executable_version_minor|int < 7)
+
+# https://pip.pypa.io/en/stable/news/#v21-0 (2021-01-23)
+- name: determine default pip version (<21)
+  ansible.builtin.set_fact:
+    pip__default_pip_version: "<21"
+  when: (pip__python_executable_version_major|int == 2) or
+    (pip__python_executable_version_major|int == 3 and pip__python_executable_version_minor|int < 6)
+
+# https://pip.pypa.io/en/stable/news/#v19-2 (2019-07-22)
+- name: determine default pip version (<19.2)
+  ansible.builtin.set_fact:
+    pip__default_pip_version: "<19.2"
+  when: (pip__python_executable_version_major|int == 3 and pip__python_executable_version_minor|int < 5)
+
+# https://pip.pypa.io/en/stable/news/#v18-0 (2018-07-22)
+- name: determine default pip version (<18.0)
+  ansible.builtin.set_fact:
+    pip__default_pip_version: "<18.0"
+  when: (pip__python_executable_version_major|int == 3 and pip__python_executable_version_minor|int < 4)
+
+- name: determine default pip version (>=22)
+  ansible.builtin.set_fact:
+    pip__default_pip_version: ">=22"
+  when: (pip__default_pip_version is not defined)

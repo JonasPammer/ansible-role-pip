@@ -23,8 +23,8 @@
           - pip__register_stat_virtualenv.stat.exists
           - pip__register_stat_virtualenv.stat.isdir
 
-    - name: execute pip freeze
-      ansible.builtin.shell: "pip freeze"
+    - name: execute pip3 freeze
+      ansible.builtin.shell: "pip3 freeze"
       register: pip__register_shell_pip_freeze
 
     - name: Test if defined package was installed.

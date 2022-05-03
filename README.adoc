@@ -76,10 +76,32 @@ must be installed on the Ansible controller.
 
 [source,yaml]
 ----
-pip_version: ">=20"
+pip_version: [latest possible version which supports the python version of behind `pip_python_executable`]
 ----
 The version of pip to install using pip after pip was installed
 in form of a https://pip.pypa.io/en/stable/cli/pip_install/#requirement-specifiers[pip requirement specifier].
+
+|===
+| Version behind `pip_python_executable` | Default `pip_version`
+
+| no match
+| >=22
+
+| 3.6
+| <22
+
+| 3.5
+| <21
+
+| 2 (.7 assumed)
+| <21
+
+| 3.4
+| <19.2
+
+| 3.3
+| <18.0
+|===
 
 [TIP]
 ====
@@ -108,8 +130,11 @@ The name of the package(s) to install to get `virtualenv` on the system.
 ----
 pip_executable: "{{ 'pip3' if pip_package.startswith('python3') else 'pip' }}"
 ----
-The role will try to autodetect the pip executable based on the `pip_package`
-(e.g. `pip` for Python 2 and `pip3` for Python 3). You can also override this explicitly, e.g. `pip_executable: pip3.6`.
+The `pip_executable` passed to the `ansible.builtin.pip` modules issued by this role.
+
+The role will try to autodetect the pip executable based on the `pip_package`.
+You may also override this explicitly, e.g. `pip_executable: pip3.6`,
+in case .
 
 [source,yaml]
 ----
@@ -184,6 +209,15 @@ environment::
 _Defaults to `pip_install_packages_environment` if exists._
 +
 Environment Variables passed to the pip module.
+
+[[pip_python_executable]]
+[source,yaml]
+----
+pip_python_executable: "{{ 'python3' if pip_package.startswith('python3') else 'python' }}"
+----
+This variable is being used to determine the default value of `pip_version`.
+
+The role will try to autodetect the python executable based on the `pip_package`.
 
 
 [[public_vars]]
