@@ -1,5 +1,5 @@
 [[development-dependencies]]
-=== Development Dependencies
+=== 📌 Development Dependencies
 Development Dependencies are defined in a
 https://pip.pypa.io/en/stable/user_guide/#requirements-files[pip requirements file]
 named `requirements-dev.txt`.
@@ -37,13 +37,13 @@ When a new tag is pushed, https://github.com/JonasPammer/ansible-role-pip/action
 a GitHub CI workflow] takes care of importing the role to my Ansible Galaxy Account.
 image:https://github.com/JonasPammer/ansible-role-pip/actions/workflows/release-to-galaxy.yml/badge.svg[Release CI]
 
-==== Changelog
+==== 🕗 Changelog
 When a new tag is pushed, an appropriate GitHub Release will be created
 by the Repository Maintainer to provide a proper human change log with a title and description.
 
 
 [[pre-commit]]
-=== General Linting and Styling Conventions
+=== ℹ️ General Linting and Styling Conventions
 General Linting and Styling Conventions are
 https://stackoverflow.blog/2020/07/20/linters-arent-in-your-way-theyre-on-your-side/[*automatically* held up to Standards]
 by various https://pre-commit.com/[`pre-commit`] hooks, at least to some extend.
@@ -73,7 +73,7 @@ You can also, for example, execute pre-commit's hooks at any time by running `pr
 
 
 [[development-guidelines]]
-=== 💁 Ansible Role Development Guidelines
+=== ℹ️ Ansible Role Development Guidelines
 
 Please take a look at my https://github.com/JonasPammer/cookiecutter-ansible-role/blob/master/ROLE_DEVELOPMENT_GUIDELINES.adoc[
 Ansible Role Development Guidelines].
@@ -84,7 +84,7 @@ General Ansible Role Development (Best) Practices].
 
 
 [[testing]]
-=== Testing
+=== 🧪 Testing
 Automatic Tests are run on each Contribution using GitHub Workflows.
 
 The Tests primarily resolve around running
@@ -108,7 +108,7 @@ $ MOLECULE_DISTRO=centos7 tox
 For a list of possible values fed to `MOLECULE_DISTRO`,
 take a look at the matrix defined in link:.github/workflows/ci.yml[].
 
-==== Debugging a Molecule Container
+==== 🐛 Debugging a Molecule Container
 
 1. Run your molecule tests with the option `MOLECULE_DESTROY=never`, e.g.:
 +
