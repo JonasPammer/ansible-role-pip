@@ -1,22 +1,13 @@
 = ansible-role-pip
 Jonas Pammer <opensource@jonaspammer.at>;
 :toc:
-:toclevels: 3
+:toclevels: 2
 :toc-placement!:
 :source-highlighter: rouge
 
 
 // Very Relevant Status Badges
 https://github.com/JonasPammer/ansible-role-pip/actions/workflows/ci.yml[image:https://github.com/JonasPammer/ansible-role-pip/actions/workflows/ci.yml/badge.svg[Testing CI]]
-
-// Badges about Conventions in this Project
-https://conventionalcommits.org[image:https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg[Conventional Commits]]
-https://results.pre-commit.ci/latest/github/JonasPammer/ansible-role-pip/master[image:https://results.pre-commit.ci/badge/github/JonasPammer/ansible-role-pip/master.svg[pre-commit.ci status]]
-// image:https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white[pre-commit, link=https://github.com/pre-commit/pre-commit]
-https://open.vscode.dev/JonasPammer/ansible-role-pip[image:https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc[Open in Visual Studio Code]]
-image:https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square[PRs Welcome]
-
-
 
 
 An Ansible role for installing pip (the python package installer) to the system.
@@ -335,6 +326,11 @@ vars:
 
 [[development]]
 == 📝 Development
+// Badges about Conventions in this Project
+https://conventionalcommits.org[image:https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg[Conventional Commits]]
+https://results.pre-commit.ci/latest/github/JonasPammer/ansible-role-pip/master[image:https://results.pre-commit.ci/badge/github/JonasPammer/ansible-role-pip/master.svg[pre-commit.ci status]]
+// image:https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white[pre-commit, link=https://github.com/pre-commit/pre-commit]
+
 [[development-system-dependencies]]
 === 📌 Development Machine Dependencies
 
@@ -538,6 +534,9 @@ You can also, for example, execute pre-commit's hooks at any time by running `pr
 
 [[contributing]]
 == 💪 Contributing
+https://open.vscode.dev/JonasPammer/ansible-role-pip[image:https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc[Open in Visual Studio Code]]
+image:https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square[PRs Welcome]
+
 // Included in README.adoc
 :toc:
 :toclevels: 3
