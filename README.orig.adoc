@@ -1,0 +1,347 @@
+= ansible-role-pip
+Jonas Pammer <opensource@jonaspammer.at>;
+:toc:
+:toclevels: 3
+:toc-placement!:
+:source-highlighter: rouge
+
+ifdef::env-github[]
+// https://gist.github.com/dcode/0cfbf2699a1fe9b46ff04c41721dda74#admonitions
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+// Very Relevant Status Badges
+https://github.com/JonasPammer/ansible-role-pip/actions/workflows/ci.yml[image:https://github.com/JonasPammer/ansible-role-pip/actions/workflows/ci.yml/badge.svg[Testing CI]]
+
+// Badges about Conventions in this Project
+https://conventionalcommits.org[image:https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg[Conventional Commits]]
+https://results.pre-commit.ci/latest/github/JonasPammer/ansible-role-pip/master[image:https://results.pre-commit.ci/badge/github/JonasPammer/ansible-role-pip/master.svg[pre-commit.ci status]]
+// image:https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white[pre-commit, link=https://github.com/pre-commit/pre-commit]
+https://open.vscode.dev/JonasPammer/ansible-role-pip[image:https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc[Open in Visual Studio Code]]
+image:https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square[PRs Welcome]
+
+
+ifdef::env-github[]
+[TIP]
+__A single-page version of this README can be found at
+https://JonasPammer.github.io/ansible-role-pip[JonasPammer.github.io/ansible-role-pip].__
+endif::[]
+
+
+An Ansible role for installing pip (the python package installer) to the system.
+
+This role can also be used to install a specific set of pip packages
+to either the system or in a virtualenv.
+
+This role also ensures pip has the defined version by upgrading pip using pip.
+
+
+toc::[]
+
+[[meta]]
+== 🔎 Metadata
+Below you can find information on…
+
+* the role's required Ansible version
+* the role's supported platforms
+* the role's https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#role-dependencies[role dependencies]
+
+.link:meta/main.yml[]
+[source,yaml]
+----
+include::meta/main.yml[]
+----
+
+
+[[requirements]]
+== 📌 Requirements
+// Any prerequisites that may not be covered by this role or Ansible itself should be mentioned here.
+The Ansible User needs to be able to `become`.
+
+
+The https://galaxy.ansible.com/community/general[`community.general` collection]
+must be installed on the Ansible controller.
+
+
+[[variables]]
+== 📜 Role Variables
+// A description of the settable variables for this role should go here
+// and any variables that can/should be set via parameters to the role.
+// Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.)
+// should be mentioned here as well.
+
+[source,yaml]
+----
+pip_version: [latest possible version which supports the python version of behind `pip_python_executable`]
+----
+The version of pip to install using pip after pip was installed
+in form of a https://pip.pypa.io/en/stable/cli/pip_install/#requirement-specifiers[pip requirement specifier].
+
+|===
+| Version behind `pip_python_executable` | Default `pip_version`
+
+| no match
+| >=22
+
+| 3.6
+| <22
+
+| 3.5
+| <21
+
+| 2 (.7 assumed)
+| <21
+
+| 3.4
+| <19.2
+
+| 3.3
+| <18.0
+|===
+
+[TIP]
+====
+Checkout https://pypi.org/project/pip/#history[pip's pypi release history]
+for available `pip`-versions.
+
+Also, if interested, checkout https://pip.pypa.io/en/stable/news/[the pip documentation]
+for a human-generated change log of the changes to the `pip` project
+__(Maintained as described in their https://pip.pypa.io/en/latest/development/contributing/#news-entries[Contribution Guidelines])__.
+====
+
+[source,yaml]
+----
+pip_package: "python3-pip"
+----
+The name of the package(s) to install to get `pip` on the system.
+For older systems that don't have Python 3 available, you can set this to `python-pip`.
+
+[source,yaml]
+----
+pip_virtualenv_packages: "virtualenv"
+----
+The name of the package(s) to install to get `virtualenv` on the system.
+
+[source,yaml]
+----
+pip_executable: "{{ 'pip3' if pip_package.startswith('python3') else 'pip' }}"
+----
+The `pip_executable` passed to the `ansible.builtin.pip` modules issued by this role.
+
+The role will try to autodetect the pip executable based on the `pip_package`.
+You may also override this explicitly, e.g. `pip_executable: pip3.6`,
+in case .
+
+[source,yaml]
+----
+pip_install_packages: []
+----
+A list of packages to install with
+https://docs.ansible.com/ansible/2.9/modules/pip_module.html[pip].
+
+Each entry may either be a simple string (shorthand for `- name: …`)
+or an own object with below properties:
+
+_chdir_::
+`cd` into this directory before running the command.
+
+name::
+The name of a Python library to install or the url(bzr+,hg+,git+,svn+) of the remote package.
+
+version::
+The version number to install of the Python library specified in the name parameter.
+
+requirements::
+Instead of using `name` and `version` to define a single package inline
+you may also use this option to reference to a path of a pip requirements file,
+which should be local to the _remote_ system.
+File can be specified as a relative path if using the `chdir` option.
+
+state::
+The state of the pip module (i.e. absent / forcereinstall / latest / *present*)
+
+umask::
+_Defaults to `pip_install_packages_umask` if exists._
++
+The system umask to apply before installing the pip package.
+This is useful, for example, when installing on systems that have a very restrictive umask by default
+(e.g., "0077") and you want to pip install packages which are to be used by all users.
+Note that this requires you to specify desired umask mode as an octal string, (e.g., "0022").
+
+virtualenv::
+_Defaults to `pip_install_packages_virtualenv` if exists._
++
+Path to a virtualenv directory to install into.
+If the virtualenv does not exist, it will be created before installing packages.
+The optional `virtualenv_command`, and `virtualenv_python` options affect the creation of the virtualenv.
+
+virtualenv_command::
+_Defaults to `pip_install_packages_virtualenv_command` if exists._
++
+The command or a pathname to the command to create the virtual environment with.
+For example `pyvenv`, *`virtualenv`*, `virtualenv2`, `~/bin/virtualenv`, `/usr/local/bin/virtualenv`.
+
+virtualenv_python::
+_Defaults to `pip_install_packages_virtualenv_python` if exists._
++
+The Python executable used for creating the virtual environment.
+For example python3.5, python2.7.
+When not specified, the Python version used to run the ansible module is used.
+This parameter should not be used when `virtualenv_command` is using `pyvenv` or the `-m venv` module.
+
+virtualenv_site_packages::
+_Defaults to `pip_install_packages_virtualenv_python` if exists._
++
+Whether the virtual environment will inherit packages from the global site-packages directory.
+Note that if this setting is changed on an already existing virtual environment
+it will not have any effect - the environment must be deleted and newly created.
+
+extra_args::
+_Defaults to `pip_install_packages_extra_args` if exists._
++
+Extra arguments passed to pip.
+
+environment::
+_Defaults to `pip_install_packages_environment` if exists._
++
+Environment Variables passed to the pip module.
+
+[[pip_python_executable]]
+[source,yaml]
+----
+pip_python_executable: "{{ 'python3' if pip_package.startswith('python3') else 'python' }}"
+----
+This variable is being used to determine the default value of `pip_version`.
+
+The role will try to autodetect the python executable based on the `pip_package`.
+
+
+[[public_vars]]
+== 📜 Facts/Variables defined by this role
+
+Each variable listed in this section
+is dynamically defined when executing this role (and can only be overwritten using `ansible.builtin.set_facts`) _and_
+is meant to be used not just internally.
+
+
+[[dependencies]]
+== 👫 Dependencies
+// A list of other roles should go here,
+// plus any details in regard to parameters that may need to be set for other roles,
+// or variables that are used from other roles.
+
+
+[[example_playbooks]]
+== 📚 Example Playbook Usages
+// Including examples of how to use this role in a playbook for common scenarios is always nice for users.
+
+[NOTE]
+====
+This role is part of https://github.com/JonasPammer/ansible-roles[
+many compatible purpose-specific roles of mine].
+
+The machine needs to be prepared.
+In CI, this is done in `molecule/default/prepare.yml`
+which sources its soft dependencies from `requirements.yml`:
+
+.link:molecule/default/prepare.yml[]
+[source,yaml]
+----
+include::molecule/default/prepare.yml[]
+----
+
+The following diagram is a compilation of the "soft dependencies" of this role
+as well as the recursive tree of their soft dependencies.
+
+image:https://raw.githubusercontent.com/JonasPammer/ansible-roles/master/graphs/dependencies_pip.svg[
+requirements.yml dependency graph of jonaspammer.pip]
+====
+
+.Minimum Viable Play
+====
+[source,yaml]
+----
+roles:
+  - "jonaspammer.pip"
+----
+====
+
+.Installing pip for Python 2
+====
+[source,yaml]
+----
+roles:
+  - "jonaspammer.pip"
+
+vars:
+  - pip_package: "python-pip"
+----
+====
+
+.Installing pip packages
+====
+[source,yaml]
+----
+roles:
+  - "jonaspammer.pip"
+
+vars:
+  pip_install_packages:
+  # Specify names and versions.
+  - name: docker
+    version: "1.2.3"
+  - name: awscli
+    version: "1.11.91"
+
+  # Or specify bare packages to get the latest release.
+  - docker
+  - awscli
+
+  # Or uninstall a package.
+  - name: docker
+    state: absent
+
+  # Or update a package to the latest version.
+  - name: docker
+    state: latest
+
+  # Or force a reinstall.
+  - name: docker
+    state: forcereinstall
+----
+====
+
+
+
+[[development]]
+== 📝 Development
+include::DEVELOPMENT.adoc[]
+
+
+[[contributing]]
+== 💪 Contributing
+include::CONTRIBUTING.adoc[]
+
+
+[[changelog]]
+== 🗒 Changelog
+Please refer to the
+https://github.com/JonasPammer/ansible-role-pip/releases[Release Page of this Repository]
+for a human changelog of the corresponding
+https://github.com/JonasPammer/ansible-role-pip/tags[Tags (Versions) of this Project].
+
+Note that this Project adheres to Semantic Versioning.
+Please report any accidental breaking changes of a minor version update.
+
+
+[[license]]
+== ⚖️ License
+
+.link:LICENSE[]
+----
+include::LICENSE[]
+----
