@@ -1,8 +1,8 @@
 ---
 - name: execute command to get python version
-  ansible.builtin.shell: "{{ pip_python_executable }} --version"
-  register: pip__register_shell_pip_python_version
+  ansible.builtin.command: "{{ pip_python_executable }} --version"
   changed_when: false
+  register: pip__register_shell_pip_python_version
 
 - name: analyze if python version is python 2
   ansible.builtin.set_fact:

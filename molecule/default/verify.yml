@@ -25,13 +25,15 @@
           - pip__register_stat_virtualenv.stat.isdir
 
     - name: execute pip3 freeze
-      ansible.builtin.shell: "pip3 freeze"
+      ansible.builtin.command: "pip3 freeze"
+      changed_when: false
       register: pip__register_shell_pip_freeze
 
     - name: Test if defined package was installed.
       ansible.builtin.assert:
         that:
           - '"awscli" in pip__register_shell_pip_freeze.stdout'
+
     - name: Test if defined package was installed in correct version.
       ansible.builtin.assert:
         that:
