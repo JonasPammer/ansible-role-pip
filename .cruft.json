@@ -12,7 +12,7 @@
       "min_ansible_version": "2.9",
       "allow_duplicates": "no",
       "ansible_user_needs_to_become": "True",
-      "_role_name": null,
+      "role_name_": "pip",
       "role_name": "pip",
       "project_slug": "ansible-role-pip",
       "project_short_purpose": "installing the python package installer to the system",
