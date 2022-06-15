@@ -674,8 +674,8 @@ pre.rouge {
 to either the system or in a virtualenv.</p>
 </div>
 <div class="paragraph">
-<p>This role also ensures pip has the defined version
-by upgrading pip using pip with <code>--upgrade</code> option enabled.</p>
+<p>This role also ensures pip has the latest version in the defined version spec
+by using <code>forcereinstall</code> by default.</p>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle" class="title">Table of Contents</div>
@@ -810,23 +810,23 @@ in form of a <a href="https://pip.pypa.io/en/stable/cli/pip_install/#requirement
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">3.6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;22</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">~=22</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">3.5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;21</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">~=21</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2 (.7 assumed)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;21</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">~=21</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">3.4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;19.2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">~=19.2</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">3.3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;18.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">~=18.0</p></td>
 </tr>
 </tbody>
 </table>
@@ -849,6 +849,23 @@ for a human-generated change log of the changes to the <code>pip</code> project
 </td>
 </tr>
 </table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="yaml"><span class="na">pip_state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">forcereinstall"</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>State to pass to <code>pip install pip</code>.
+One of: <code>absent</code>, <code>forcereinstall</code>, <code>latest</code>, <code>present</code>.</p>
+</div>
+<div class="paragraph">
+<p>If <code>forcereinstall</code> is passed this role tries to keep idemponency
+by disabling <code>changed_when</code> on the install and instead executing
+another task that compares the before/after result of <code>pip --version</code>.</p>
+</div>
+<div class="paragraph">
+<p>If <code>latest</code> is passed <code>pip_version</code> has no effect.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1594,7 +1611,7 @@ SOFTWARE.</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-06-15 11:16:27 UTC
+Last updated 2022-06-15 11:56:11 UTC
 </div>
 </div>
 </body>
