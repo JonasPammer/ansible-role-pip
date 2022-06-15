@@ -32,7 +32,7 @@
   when: (pip__python_executable_version_major|int == 3 and pip__python_executable_version_minor|int < 7)
 
 # https://pip.pypa.io/en/stable/news/#v21-0 (2021-01-23)
-- name: determine default pip version (<21)
+- name: determine default pip version (~=21)
   ansible.builtin.set_fact:
     pip__default_pip_version: "~=21"
   when: (pip__python_executable_version_major|int == 2) or
