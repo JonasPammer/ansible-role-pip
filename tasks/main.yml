@@ -12,7 +12,7 @@
 - name: Install pip using pip to ensure desired version.
   ansible.builtin.pip:
     name: "pip"
-    state: forcereinstall
+    state: latest
     version: "{{ pip_version }}"
     executable: "{{ pip_executable }}"
 
