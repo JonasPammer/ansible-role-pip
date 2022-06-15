@@ -32,6 +32,12 @@
   changed_when: pip__register_shell_pip_python_version.stdout != pip__register_shell_pip_python_version_after.stdout
   when: pip_state == "forcereinstall"
 
+- name: debug
+  ansible.builtin.debug: var=pip__register_shell_pip_python_version
+
+- name: debug
+  ansible.builtin.debug: var=pip__register_shell_pip_python_version_after
+
 - name: Install virtualenv system packages.
   ansible.builtin.package:
     name: "{{ pip_virtualenv_packages }}"
