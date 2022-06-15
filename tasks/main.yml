@@ -12,9 +12,16 @@
 - name: Install pip using pip to ensure desired version.
   ansible.builtin.pip:
     name: "pip"
-    state: latest
-    version: "{{ pip_version }}"
+    state: "{{ pip_state }}"
+    version: "{{ pip_version if pip_state != 'latest' else omit }}"
     executable: "{{ pip_executable }}"
+  changed_when: "{{ false if pip_state == 'forcereinstall' else omit }}"
+
+- name: execute command to check if python version has been altered (when forcereinstall was used)
+  ansible.builtin.command: "{{ pip_python_executable }} --version"
+  register: pip__register_shell_pip_python_version_after
+  changed_when: pip__register_shell_pip_python_version.stdout != pip__register_shell_pip_python_version_after.stdout
+  when: pip_state == "forcereinstall"
 
 - name: Install virtualenv system packages.
   package:

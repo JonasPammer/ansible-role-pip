@@ -6,6 +6,7 @@ pip_package: python3-pip
 
 pip_python_executable: "{{ 'python3' if pip_package.startswith('python3') else 'python' }}"
 pip_version: "{{ pip__default_pip_version }}"
+pip_state: "forcereinstall"
 
 _pip_virtualenv_packages:
   default: [virtualenv]
