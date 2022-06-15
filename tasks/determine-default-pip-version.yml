@@ -54,3 +54,6 @@
   ansible.builtin.set_fact:
     pip__default_pip_version: ">=22"
   when: (pip__default_pip_version is not defined)
+
+- name: debug
+  ansible.builtin.debug: var=pip__default_pip_version
