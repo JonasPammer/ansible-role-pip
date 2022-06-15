@@ -15,8 +15,8 @@ An Ansible role for installing pip (the python package installer) to the system.
 This role can also be used to install a specific set of pip packages
 to either the system or in a virtualenv.
 
-This role also ensures pip has the defined version
-by upgrading pip using pip with `--upgrade` option enabled.
+This role also ensures pip has the latest version in the defined version spec
+by using `forcereinstall` by default.
 
 
 toc::[]
@@ -96,19 +96,19 @@ in form of a https://pip.pypa.io/en/stable/cli/pip_install/#requirement-specifie
 | >=22
 
 | 3.6
-| <22
+| ~=22
 
 | 3.5
-| <21
+| ~=21
 
 | 2 (.7 assumed)
-| <21
+| ~=21
 
 | 3.4
-| <19.2
+| ~=19.2
 
 | 3.3
-| <18.0
+| ~=18.0
 |===
 
 [TIP]
@@ -120,6 +120,19 @@ Also, if interested, checkout https://pip.pypa.io/en/stable/news/[the pip docume
 for a human-generated change log of the changes to the `pip` project
 __(Maintained as described in their https://pip.pypa.io/en/latest/development/contributing/#news-entries[Contribution Guidelines])__.
 ====
+
+[source,yaml]
+----
+pip_state: "forcereinstall"
+----
+State to pass to `pip install pip`.
+One of: `absent`, `forcereinstall`, `latest`, `present`.
+
+If `forcereinstall` is passed this role tries to keep idemponency
+by disabling `changed_when` on the install and instead executing
+another task that compares the before/after result of `pip --version`.
+
+If `latest` is passed `pip_version` has no effect.
 
 [source,yaml]
 ----
