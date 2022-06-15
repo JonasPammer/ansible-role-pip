@@ -15,7 +15,8 @@ An Ansible role for installing pip (the python package installer) to the system.
 This role can also be used to install a specific set of pip packages
 to either the system or in a virtualenv.
 
-This role also ensures pip has the defined version by upgrading pip using pip.
+This role also ensures pip has the defined version
+by upgrading pip using pip with force-reinstall enabled.
 
 
 toc::[]
