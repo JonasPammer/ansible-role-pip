@@ -9,13 +9,22 @@
 - name: import tasks to determine default pip version
   ansible.builtin.import_tasks: determine-default-pip-version.yml
 
+- name: Install pip using pip to ensure desired version (forcereinstall).
+  ansible.builtin.pip:
+    name: "pip"
+    state: "{{ pip_state }}"
+    version: "{{ pip_version }}"
+    executable: "{{ pip_executable }}"
+  changed_when: false
+  when: pip_state == 'forcereinstall'
+
 - name: Install pip using pip to ensure desired version.
   ansible.builtin.pip:
     name: "pip"
     state: "{{ pip_state }}"
     version: "{{ pip_version if pip_state != 'latest' else omit }}"
     executable: "{{ pip_executable }}"
-  changed_when: "{{ false if pip_state == 'forcereinstall' else omit }}"
+  when: pip_state != 'forcereinstall'
 
 - name: execute command to check if python version has been altered (when forcereinstall was used)
   ansible.builtin.command: "{{ pip_python_executable }} --version"
