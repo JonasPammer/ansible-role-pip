@@ -9,6 +9,7 @@
 - name: import tasks to determine default pip version
   ansible.builtin.import_tasks: determine-default-pip-version.yml
 
+# TODO: tmate'ly debug
 - name: Install pip using pip to ensure desired version (forcereinstall).
   ansible.builtin.pip:
     name: "pip"
@@ -29,14 +30,9 @@
 - name: execute command to check if python version has been altered (when forcereinstall was used)
   ansible.builtin.command: "{{ pip_python_executable }} --version"
   register: pip__register_shell_pip_python_version_after
+  # FIXME: we need pip version before/after here
   changed_when: pip__register_shell_pip_python_version.stdout != pip__register_shell_pip_python_version_after.stdout
   when: pip_state == "forcereinstall"
-
-- name: debug
-  ansible.builtin.debug: var=pip__register_shell_pip_python_version
-
-- name: debug
-  ansible.builtin.debug: var=pip__register_shell_pip_python_version_after
 
 - name: Install virtualenv system packages.
   ansible.builtin.package:
