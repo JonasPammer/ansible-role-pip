@@ -96,19 +96,16 @@ in form of a https://pip.pypa.io/en/stable/cli/pip_install/#requirement-specifie
 | >=22
 
 | 3.6
-| ~=21
+| <22
 
-| 3.5
-| ~=20
-
-| 2 (.7 assumed)
-| ~=20
+| 3.5 or 2 (.7 assumed)
+| <21
 
 | 3.4
-| ~=19.1
+| <19.2
 
 | 3.3
-| ~=17
+| <18
 |===
 
 [TIP]
