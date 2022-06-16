@@ -25,7 +25,6 @@
     pip__python_executable_version_major: "{{ pip__python_executable_version_raw.split('.')[0] | int }}"
     pip__python_executable_version_minor: "{{ pip__python_executable_version_raw.split('.')[1] | int }}"
 
-
 # https://pip.pypa.io/en/stable/news/#v22-0 (2022-01-29)
 - name: determine default pip version (python 3.6)
   ansible.builtin.set_fact:
