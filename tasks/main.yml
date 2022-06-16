@@ -1,6 +1,9 @@
 ---
 # tasks file of ansible-role jonaspammer.pip
 
+- name: check if all variables have been set correctly
+  ansible.builtin.import_tasks: assert.yml
+
 - name: Install pip system packages.
   ansible.builtin.package:
     name: "{{ pip_package }}"

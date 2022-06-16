@@ -1,10 +1,9 @@
 ---
 # tasks file for testing that variables of ansible-role jonaspammer.pip are set correctly
 
-# - name: test if variable_name is set correctly
-#   ansible.builtin.assert:
-#     that:
-#       - variable_name is defined
-#       - variable_name is number
-#       - variable_name >= 0
-#     quiet: true
+- name: test if pip_state is set correctly
+  ansible.builtin.assert:
+    that:
+      - pip_state is defined
+      - pip_state in ["forcereinstall", "latest", "present"]
+    quiet: true
