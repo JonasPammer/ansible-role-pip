@@ -37,4 +37,4 @@
     - name: Test if defined package was installed in correct version.
       ansible.builtin.assert:
         that:
-          - '"awscli==1.22.97" in pip__register_shell_pip_freeze.stdout'
+          - '"pre-commit==1.0.0" in pip__register_shell_pip_freeze.stdout'
