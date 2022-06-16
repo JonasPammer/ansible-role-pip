@@ -123,7 +123,7 @@ __(Maintained as described in their https://pip.pypa.io/en/latest/development/co
 pip_state: "forcereinstall"
 ----
 State to pass to `pip install pip`.
-One of: `absent`, `forcereinstall`, `latest`, `present`.
+One of: `forcereinstall`, `latest`, `present`.
 
 If `forcereinstall` is passed this role tries to keep idemponency
 by disabling `changed_when` on the install and instead executing
