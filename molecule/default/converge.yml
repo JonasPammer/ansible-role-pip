@@ -7,8 +7,8 @@
 
   vars:
     pip_install_packages:
-      - name: awscli
-        version: "1.22.97"
+      - name: pre-commit
+        version: "1.0.0"
       - awscli
       - name: ipaddress
         virtualenv: /virtualenv
