@@ -37,7 +37,7 @@
 - name: >
     Execute command to check if pip version has been altered
     (this task adds changed_when behaviour for when 'forcereinstall' was used).
-  ansible.builtin.command: "{{ pip_executable }} --version"
+  ansible.builtin.shell: "{{ pip_python_executable }} -m pip --version"
   register: pip__register_shell_pip_version_after
   changed_when: pip__register_shell_pip_version.stdout != pip__register_shell_pip_version_after.stdout
   when: pip_state == "forcereinstall"
