@@ -8,8 +8,8 @@ _pip__somevar:
   RedHat: ""
 
 pip__somevar: "{{
-  _pip_somevar[ansible_distribution ~ '_' ~ ansible_distribution_major_version]|default(
-  _pip_somevar[ansible_os_family ~ '_' ~ ansible_distribution_major_version])|default(
-  _pip_somevar[ansible_distribution])|default(
-  _pip_somevar[ansible_os_family])|default(
-  _pip_somevar['default']) }}"
+  _pip__somevar[ansible_distribution ~ '_' ~ ansible_distribution_major_version]|default(
+  _pip__somevar[ansible_os_family ~ '_' ~ ansible_distribution_major_version])|default(
+  _pip__somevar[ansible_distribution])|default(
+  _pip__somevar[ansible_os_family])|default(
+  _pip__somevar['default']) }}"
