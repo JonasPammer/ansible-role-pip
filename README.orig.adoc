@@ -14,6 +14,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
+https://galaxy.ansible.com/jonaspammer/pip[image:https://img.shields.io/badge/available%20on%20ansible%20galaxy-jonaspammer.pip-brightgreen[Version on Galaxy]]
 // Very Relevant Status Badges
 https://github.com/JonasPammer/ansible-role-pip/actions/workflows/ci.yml[image:https://github.com/JonasPammer/ansible-role-pip/actions/workflows/ci.yml/badge.svg[Testing CI]]
 
