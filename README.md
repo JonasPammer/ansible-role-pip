@@ -22,6 +22,7 @@ Below you can find information on…
     galaxy_info:
       role_name: "pip"
       description: "An ansible role for installing pip (python package installer) to the system."
+      standalone: true
 
       author: "jonaspammer"
       license: "MIT"
