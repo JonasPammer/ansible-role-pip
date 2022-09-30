@@ -3,7 +3,7 @@
   hosts: all
 
   roles:
-    - role: "ansible-role-pip"
+    - name: "ansible-role-pip"
 
   vars:
     pip_install_packages:
