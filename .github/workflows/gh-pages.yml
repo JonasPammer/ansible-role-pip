@@ -7,6 +7,11 @@ name: build self-contained READMEs
 permissions:
   contents: read
 
+# Cancel a currently running workflow from the same PR, branch or tag when a new workflow is triggered for it
+concurrency:
+  group: "${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}"
+  cancel-in-progress: true
+
 jobs:
   gh-pages:
     runs-on: ubuntu-latest
@@ -36,6 +41,14 @@ jobs:
       - name: install asciidoctor and other relevant ruby gems
         run: gem install --no-document asciidoctor asciidoctor-reducer rouge coderay
 
+      - name: get first line of commit message as variable
+        shell: bash
+        run: |
+          echo "FIRST_LINE_OF_HEAD_COMMIT_MESSAGE=${HEAD_COMMIT_MESSAGE}" | head -1 >> $GITHUB_ENV
+        env:
+          HEAD_COMMIT_MESSAGE: "${{ github.event.head_commit.message }}"
+
+      ### README.orig.adoc & co.
       - name: Generate README.adoc using ascidoctor-reducer.
         run: asciidoctor-reducer README.orig.adoc -o README.adoc
 
