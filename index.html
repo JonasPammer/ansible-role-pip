@@ -570,12 +570,13 @@ pre.rouge .gs {
 <p>An Ansible role for installing pip (the python package installer) to the system.</p>
 </div>
 <div class="paragraph">
-<p>This role can also be used to install a specific set of pip packages
-to either the system or in a virtualenv.</p>
+<p>By default, this role ensures that pip&#8217;s version always matches the latest version
+that work&#8217;s with version of the given python executable
+(something which just <code>pip --upgrade pip</code> 'ing for whatever reason doesn&#8217;t do).</p>
 </div>
 <div class="paragraph">
-<p>This role also ensures pip has the latest version in the defined version spec
-by using <code>forcereinstall</code> by default.</p>
+<p>This role can also be used to install a given set of pip packages
+to either the system or in a virtualenv.</p>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle" class="title">Table of Contents</div>
@@ -980,9 +981,17 @@ In CI, this is done in <code>molecule/default/prepare.yml</code>
 which sources its soft dependencies from <code>requirements.yml</code>:</p>
 </div>
 <div class="listingblock">
-<div class="title"><a href="molecule/default/prepare.yml" class="bare">molecule/default/prepare.yml</a></div>
+<div class="title"><a href="molecule/resources/prepare.yml" class="bare">molecule/resources/prepare.yml</a></div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="yaml"><span class="s">Unresolved directive in README.orig.adoc - include::molecule/default/prepare.yml[]</span></code></pre>
+<pre class="rouge highlight"><code data-lang="yaml"><span class="nn">---</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">prepare</span>
+  <span class="na">hosts</span><span class="pi">:</span> <span class="s">all</span>
+  <span class="na">become</span><span class="pi">:</span> <span class="kc">true</span>
+  <span class="na">gather_facts</span><span class="pi">:</span> <span class="kc">false</span>
+
+  <span class="na">roles</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">role</span><span class="pi">:</span> <span class="s">jonaspammer.bootstrap</span>
+    <span class="c1">#    - name: jonaspammer.core_dependencies</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1037,7 +1046,7 @@ as well as the recursive tree of their soft dependencies.</p>
   <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">awscli</span>
     <span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1.11.91"</span>
 
-  <span class="c1"># Or specify bare packages to get the latest release.</span>
+  <span class="c1"># Or specify bare packages to get the latest release (on first install).</span>
   <span class="pi">-</span> <span class="s">docker</span>
   <span class="pi">-</span> <span class="s">awscli</span>
 
@@ -1739,7 +1748,7 @@ SOFTWARE.</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-05-08 18:09:10 UTC
+Last updated 2023-05-10 08:32:05 UTC
 </div>
 </div>
 </body>
