@@ -2,9 +2,9 @@
 
 An Ansible role for installing pip (the python package installer) to the system.
 
-This role can also be used to install a specific set of pip packages to either the system or in a virtualenv.
+By default, this role ensures that pip’s version always matches the latest version that work’s with version of the given python executable (something which just `pip --upgrade pip` 'ing for whatever reason doesn’t do).
 
-This role also ensures pip has the latest version in the defined version spec by using `forcereinstall` by default.
+This role can also be used to install a given set of pip packages to either the system or in a virtualenv.
 
 # 🔎 Metadata
 
@@ -228,9 +228,17 @@ This role is part of [ many compatible purpose-specific roles of mine](https://g
 
 The machine needs to be prepared. In CI, this is done in `molecule/default/prepare.yml` which sources its soft dependencies from `requirements.yml`:
 
-**[molecule/default/prepare.yml](molecule/default/prepare.yml)**
+**[molecule/resources/prepare.yml](molecule/resources/prepare.yml)**
 
-    Unresolved directive in README.orig.adoc - include::molecule/default/prepare.yml[]
+    ---
+    - name: prepare
+      hosts: all
+      become: true
+      gather_facts: false
+
+      roles:
+        - role: jonaspammer.bootstrap
+        #    - name: jonaspammer.core_dependencies
 
 The following diagram is a compilation of the "soft dependencies" of this role as well as the recursive tree of their soft dependencies.
 
@@ -256,7 +264,7 @@ The following diagram is a compilation of the "soft dependencies" of this role a
       - name: awscli
         version: "1.11.91"
 
-      # Or specify bare packages to get the latest release.
+      # Or specify bare packages to get the latest release (on first install).
       - docker
       - awscli
 
