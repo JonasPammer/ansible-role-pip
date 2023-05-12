@@ -244,15 +244,18 @@ The following diagram is a compilation of the "soft dependencies" of this role a
 
 ![requirements.yml dependency graph of jonaspammer.pip](https://raw.githubusercontent.com/JonasPammer/ansible-roles/master/graphs/dependencies_pip.svg)
 
+    ---
     roles:
       - role: jonaspammer.pip
 
+    ---
     roles:
       - role: jonaspammer.pip
 
     vars:
       - pip_package: "python-pip"
 
+    ---
     roles:
       - role: jonaspammer.pip
 

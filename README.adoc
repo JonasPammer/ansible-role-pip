@@ -326,6 +326,7 @@ requirements.yml dependency graph of jonaspammer.pip]
 ====
 [source,yaml]
 ----
+---
 roles:
   - role: jonaspammer.pip
 ----
@@ -335,6 +336,7 @@ roles:
 ====
 [source,yaml]
 ----
+---
 roles:
   - role: jonaspammer.pip
 
@@ -347,6 +349,7 @@ vars:
 ====
 [source,yaml]
 ----
+---
 roles:
   - role: jonaspammer.pip
 
