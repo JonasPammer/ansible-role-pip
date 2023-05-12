@@ -118,7 +118,7 @@ If `latest` is passed `pip_version` has no effect.
 
 The name of the package(s) to install to get `pip` on the system. For older systems that don’t have Python 3 available, you can set this to `python-pip`.
 
-    pip_virtualenv_packages: "virtualenv"
+    pip_virtualenv_packages: [OS-specific by default, see /defaults directory]
 
 The name of the package(s) to install to get `virtualenv` on the system.
 
