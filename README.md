@@ -1,6 +1,6 @@
 [![Version on Galaxy](https://img.shields.io/badge/available%20on%20ansible%20galaxy-jonaspammer.pip-brightgreen)](https://galaxy.ansible.com/jonaspammer/pip) [![Testing CI](https://github.com/JonasPammer/ansible-role-pip/actions/workflows/ci.yml/badge.svg)](https://github.com/JonasPammer/ansible-role-pip/actions/workflows/ci.yml)
 
-An Ansible role for installing pip (the python package installer) to the system.
+An Ansible role for installing the latest pip (the python package installer) to the system.
 
 By default, this role ensures that pip’s version always matches the latest version that work’s with version of the given python executable (something which just `pip --upgrade pip` 'ing for whatever reason doesn’t do).
 
@@ -21,7 +21,7 @@ Below you can find information on…
     ---
     galaxy_info:
       role_name: "pip"
-      description: "An ansible role for installing pip (python package installer) to the system."
+      description: "An ansible role for installing the latest pip (python package installer) to the system."
       standalone: true
 
       author: "jonaspammer"
