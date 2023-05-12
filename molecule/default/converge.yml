@@ -7,8 +7,8 @@
 
   vars:
     pip_install_packages:
-      - role: pre-commit
+      - name: pre-commit
         version: "1.0.0"
-      - role: awscli
-      - role: ipaddress
+      - name: awscli
+      - name: ipaddress
         virtualenv: /virtualenv
