@@ -11,6 +11,7 @@ pip_state: "forcereinstall"
 _pip_virtualenv_packages:
   default: [virtualenv]
   CentOS_7: [python-virtualenv]
+  RedHat_9: []
 
 pip_executable: "{{ 'pip3' if pip_package.startswith('python3') else 'pip' }}"
 pip_install_packages: []
