@@ -159,23 +159,23 @@ _Defaults to `pip_install_packages_virtualenv` if exists._
 
 Path to a virtualenv directory to install into. If the virtualenv does not exist, it will be created before installing packages. The optional `virtualenv_command`, and `virtualenv_python` options affect the creation of the virtualenv.
 
-virtualenv*command
-\_Defaults to `pip_install_packages_virtualenv_command` if exists.*
+virtualenv_command
+_Defaults to `pip_install_packages_virtualenv_command` if exists._
 
 The command or a pathname to the command to create the virtual environment with. For example `pyvenv`, **`virtualenv`**, `virtualenv2`, `~/bin/virtualenv`, `/usr/local/bin/virtualenv`.
 
-virtualenv*python
-\_Defaults to `pip_install_packages_virtualenv_python` if exists.*
+virtualenv_python
+_Defaults to `pip_install_packages_virtualenv_python` if exists._
 
 The Python executable used for creating the virtual environment. For example python3.5, python2.7. When not specified, the Python version used to run the ansible module is used. This parameter should not be used when `virtualenv_command` is using `pyvenv` or the `-m venv` module.
 
-virtualenv*site_packages
-\_Defaults to `pip_install_packages_virtualenv_python` if exists.*
+virtualenv_site_packages
+_Defaults to `pip_install_packages_virtualenv_python` if exists._
 
 Whether the virtual environment will inherit packages from the global site-packages directory. Note that if this setting is changed on an already existing virtual environment it will not have any effect - the environment must be deleted and newly created.
 
-extra*args
-\_Defaults to `pip_install_packages_extra_args` if exists.*
+extra_args
+_Defaults to `pip_install_packages_extra_args` if exists._
 
 Extra arguments passed to pip.
 
@@ -402,6 +402,10 @@ The tested ansible versions try to stay equivalent with the [ support pattern of
 
 - 2.13 (Ansible 6)
 
+- 2.14 (Ansible 7)
+
+- 2.15 (Ansible 8)
+
 # 📝 Development
 
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org) [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/JonasPammer/ansible-role-pip/master.svg)](https://results.pre-commit.ci/latest/github/JonasPammer/ansible-role-pip/master)
@@ -477,7 +481,7 @@ For a list of possible values fed to `MOLECULE_DISTRO`, take a look at the matri
         Python 3.8.10
         root@instance-py3-ansible-2:/# ...
 
-    If the failure you try to debug is part of `verify.yml` step and not the actual `converge.yml`, you may want to know that the output of ansible’s modules (`vars`), hosts (`hostvars`) and environment variables have been stored into files on both the provisioner and inside the docker machine under: \* `/var/tmp/vars.yml` \* `/var/tmp/hostvars.yml` \* `/var/tmp/environment.yml` `grep`, `cat` or transfer these as you wish!
+    If the failure you try to debug is part of your `verify.yml` step and not the actual `converge.yml`, you may want to know that the output of ansible’s modules (`vars`), hosts (`hostvars`) and environment variables have been stored into files on both the provisioner and inside the docker machine under: \* `/var/tmp/vars.yml` (contains host variables under the `hostvars` key) \* `/var/tmp/environment.yml` `grep`, `cat` or transfer these as you wish!
 
     You may also want to know that the files mentioned in the admonition above are attached to the **GitHub CI Artifacts** of a given Workflow run.
     This allows one to check the difference between runs and thus help in debugging what caused the bit-rot or failure in general.
