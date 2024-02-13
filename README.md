@@ -156,23 +156,23 @@ _Defaults to `pip_install_packages_virtualenv` if exists._
 
 Path to a virtualenv directory to install into. If the virtualenv does not exist, it will be created before installing packages. The optional `virtualenv_command`, and `virtualenv_python` options affect the creation of the virtualenv.
 
-virtualenv_command
-_Defaults to `pip_install_packages_virtualenv_command` if exists._
+virtualenv*command
+\_Defaults to `pip_install_packages_virtualenv_command` if exists.*
 
 The command or a pathname to the command to create the virtual environment with. For example `pyvenv`, **`virtualenv`**, `virtualenv2`, `~/bin/virtualenv`, `/usr/local/bin/virtualenv`.
 
-virtualenv_python
-_Defaults to `pip_install_packages_virtualenv_python` if exists._
+virtualenv*python
+\_Defaults to `pip_install_packages_virtualenv_python` if exists.*
 
 The Python executable used for creating the virtual environment. For example python3.5, python2.7. When not specified, the Python version used to run the ansible module is used. This parameter should not be used when `virtualenv_command` is using `pyvenv` or the `-m venv` module.
 
-virtualenv_site_packages
-_Defaults to `pip_install_packages_virtualenv_python` if exists._
+virtualenv*site_packages
+\_Defaults to `pip_install_packages_virtualenv_python` if exists.*
 
 Whether the virtual environment will inherit packages from the global site-packages directory. Note that if this setting is changed on an already existing virtual environment it will not have any effect - the environment must be deleted and newly created.
 
-extra_args
-_Defaults to `pip_install_packages_extra_args` if exists._
+extra*args
+\_Defaults to `pip_install_packages_extra_args` if exists.*
 
 Extra arguments passed to pip.
 
