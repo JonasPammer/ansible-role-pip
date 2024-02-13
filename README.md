@@ -156,23 +156,23 @@ _Defaults to `pip_install_packages_virtualenv` if exists._
 
 Path to a virtualenv directory to install into. If the virtualenv does not exist, it will be created before installing packages. The optional `virtualenv_command`, and `virtualenv_python` options affect the creation of the virtualenv.
 
-virtualenv*command
-\_Defaults to `pip_install_packages_virtualenv_command` if exists.*
+virtualenv_command
+_Defaults to `pip_install_packages_virtualenv_command` if exists._
 
 The command or a pathname to the command to create the virtual environment with. For example `pyvenv`, **`virtualenv`**, `virtualenv2`, `~/bin/virtualenv`, `/usr/local/bin/virtualenv`.
 
-virtualenv*python
-\_Defaults to `pip_install_packages_virtualenv_python` if exists.*
+virtualenv_python
+_Defaults to `pip_install_packages_virtualenv_python` if exists._
 
 The Python executable used for creating the virtual environment. For example python3.5, python2.7. When not specified, the Python version used to run the ansible module is used. This parameter should not be used when `virtualenv_command` is using `pyvenv` or the `-m venv` module.
 
-virtualenv*site_packages
-\_Defaults to `pip_install_packages_virtualenv_python` if exists.*
+virtualenv_site_packages
+_Defaults to `pip_install_packages_virtualenv_python` if exists._
 
 Whether the virtual environment will inherit packages from the global site-packages directory. Note that if this setting is changed on an already existing virtual environment it will not have any effect - the environment must be deleted and newly created.
 
-extra*args
-\_Defaults to `pip_install_packages_extra_args` if exists.*
+extra_args
+_Defaults to `pip_install_packages_extra_args` if exists._
 
 Extra arguments passed to pip.
 
@@ -443,7 +443,9 @@ For a list of possible values fed to `MOLECULE_DISTRO`, take a look at the matri
     You may also want to know that the files mentioned in the admonition above are attached to the **GitHub CI Artifacts** of a given Workflow run.
     This allows one to check the difference between runs and thus help in debugging what caused the bit-rot or failure in general.
 
-    ![178442403 e15264ca 433a 4bc7 95db cfadb573db3c](https://user-images.githubusercontent.com/32995541/178442403-e15264ca-433a-4bc7-95db-cfadb573db3c.png)
+    <figure>
+    <img src="https://user-images.githubusercontent.com/32995541/178442403-e15264ca-433a-4bc7-95db-cfadb573db3c.png" alt="178442403 e15264ca 433a 4bc7 95db cfadb573db3c" />
+    </figure>
 
 4.  After you finished your debugging, exit it and destroy the container:
 
@@ -488,7 +490,9 @@ The procedure is described [ in the official devcontainer docs under "Sharing Gi
 
 This Project shall be kept in sync with [the CookieCutter it was originally templated from](https://github.com/JonasPammer/cookiecutter-ansible-role) using [cruft](https://github.com/cruft/cruft) (if possible) or manual alteration (if needed) to the best extend possible.
 
-> ![Official Example Usage of `cruft update`](https://raw.githubusercontent.com/cruft/cruft/master/art/example_update.gif)
+> <figure>
+> <img src="https://raw.githubusercontent.com/cruft/cruft/master/art/example_update.gif" alt="Official Example Usage of `cruft update`" />
+> </figure>
 
 ### 🕗 Changelog
 
