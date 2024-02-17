@@ -40,7 +40,7 @@ name: CI (Lint + Molecule)
   pull_request:
     branches-ignore:
       - renovate/**
-    paths: &paths
+    paths:
       - ".github/workflows/ci.yml"
       - "defaults/**"
       - "handlers/**"
@@ -59,9 +59,23 @@ name: CI (Lint + Molecule)
     branches:
       - master
       - renovate/**
-    paths: *paths
+    paths:
+      # keep in sync with pull_request.paths!
+      - ".github/workflows/ci.yml"
+      - "defaults/**"
+      - "handlers/**"
+      - "meta/**"
+      - "molecule/**"
+      - "tasks/**"
+      - "vars/**"
+      - ".ansible-lint"
+      - ".gitattributes"
+      - ".yamllint"
+      - "pyproject.toml"
+      - "requirements-dev.txt"
+      - "requirements.yml"
+      - "tox.ini"
 
-  # temporary
   schedule:
     # At 05:00 on Sunday.
     - cron: "0 5 * * 0"
