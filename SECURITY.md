@@ -11,29 +11,29 @@ The current major version is supported. **For example** if the current version i
 <col style="width: 50%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: left;">Version</th>
 <th style="text-align: left;">Supported</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><p>v3.4.1</p></td>
 <td style="text-align: left;"><p>:white_check_mark:</p></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><p>v3.4.x</p></td>
 <td style="text-align: left;"><p>:white_check_mark:</p></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><p>v3.x.x</p></td>
 <td style="text-align: left;"><p>:white_check_mark:</p></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: left;"><p>v2.0.0</p></td>
 <td style="text-align: left;"><p>:x:</p></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: left;"><p>v1.0.0</p></td>
 <td style="text-align: left;"><p>:x:</p></td>
 </tr>
